@@ -81,6 +81,8 @@ command.printAllCommands()
 
 
 --------------------------------------------------------
+------ Move chatCommandHandler to a new file -----------
+--------------------------------------------------------
 
 local function chatCommandHandler(len, ply)
     local chatCommand = net.ReadString()

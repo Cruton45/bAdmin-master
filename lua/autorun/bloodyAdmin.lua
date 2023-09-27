@@ -11,6 +11,7 @@ include("modules/sh/commands.lua")
 -- Server ------------------------------------------------------------------------------
 if SERVER then
     include("modules/sv/teleport.lua")
+    include("modules/sv/bot.lua")
 end
 -- Client ------------------------------------------------------------------------------
 if SERVER then
