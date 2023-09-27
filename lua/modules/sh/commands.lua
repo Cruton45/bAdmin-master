@@ -35,8 +35,8 @@ function command.CommandExist(commandName)
     end
 end
 
-function command.Execute(commandName, ply, args)
-    commands[commandName].CommandFunc(ply, args)
+function command.Execute(commandName, ply, target)
+    commands[commandName].CommandFunc(ply, target)
 end
 
 bAdmin.command = command
