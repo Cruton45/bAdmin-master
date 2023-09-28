@@ -12,20 +12,3 @@ hook.Add( "OnPlayerChat", "mjailcommandcheck", function( ply, text)
 		return true
 	end
 end )
-
-
---[[hook.Add( "OnPlayerChat", "mjailcommandcheck", function( ply, text)
-	if (string.sub(text, 1, 6):lower() == "!bring") then
-		local args = string.Explode(" ", text)
-		net.Start("sendTeleportArgs")
-		net.WriteTable(args)
-		net.SendToServer()
-		return true
-	--[[elseif (string.sub(text, 1, 8) == "!munjail") then
-		local args = string.Explode(" ", text)
-		net.Start("munjailServer")
-		net.WriteEntity(ply)
-		net.WriteString(args[2])
-		net.SendToServer()
-	end
-end]]--

@@ -1,17 +1,21 @@
 bAdmin = {}
-bAdmin.ranks = {}
 bAdmin.player = {}
 
+----------------------------- Module Loading -------------------------------------------
+-- Shared ------------------------------------------------------------------------------
 if SERVER then
     AddCSLuaFile("modules/sh/commands.lua")
+    AddCSLuaFile("modules/sh/cami.lua")
+    AddCSLuaFile("modules/sh/util.lua")
 end
 include("modules/sh/commands.lua")
-
------------------------------ Module Loading -------------------------------------------
+include("modules/sh/cami.lua")
+include("modules/sh/util.lua")
 -- Server ------------------------------------------------------------------------------
 if SERVER then
     include("modules/sv/teleport.lua")
     include("modules/sv/bot.lua")
+    include("modules/sv/ranks.lua")
     include("modules/sv/commands.lua")
 end
 -- Client ------------------------------------------------------------------------------
@@ -21,6 +25,5 @@ end
 if CLIENT then
     include("modules/cl/chatCommand.lua")
 end
--- Shared ------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 bAdmin_IsLoaded = true

@@ -2,44 +2,20 @@ print("Server Commands Module Intialized.")
 
 local bAdmin = bAdmin
 local command = bAdmin.command
-
-local ALLOWED_RANKS = {
-    ["tmod"] = 1,
-    ["moderator"] = 2,
-    ["admin"] = 3,
-    ["senioradmin"] = 4,
-    ["headadmin"] = 5,
-    ["staffmanager"] = 6,
-    ["superadmin"] = 7
-}
+local rank = bAdmin.rank
 
 local function getPlayersByName(name)
     local found = {}
 
     if not(name) then return nil end
     
-    -------------------- Bot is recived by player.GetAll
-    PrintTable( player.GetAll() )
-
-    -------------------- Not in the for loop though
     for k, v in ipairs(player.GetAll()) do
-        print(v:Nick())
         if string.find(string.lower(v:Nick()), string.lower(name)) then
             table.insert(found, v)
         end
     end
 
     return found
-end
-
-local function rankCheck(ply)
-	for key, value in pairs(ALLOWED_RANKS)
-	do
-		rank = ply:GetUserGroup()
-		if(rank == key) then
-			return true
-		end
-	end
 end
 
 local function immunityCheck(caller, target)
@@ -60,13 +36,15 @@ end
 local function chatCommandHandler(len, ply)
     local chatCommand = net.ReadString()
     local args = net.ReadTable()
+    local plyRank = ply:GetUserGroup()
+
     if not(command.CommandExist(chatCommand)) then print("Error: Command does not exist.") return end
 
     local possibleTarget = getPlayersByName(args[1])
 
-    if(possibleTarget and #possibleTarget > 1) then print("Error: Found two targets.") return end
+    if(possibleTarget and #possibleTarget > 1) then print("Error: Found more than one targets.") return end
     if(possibleTarget and #possibleTarget < 1) then print("Error: Found no targets.") return end
-    --if not(rankCheck(ply)) then print("Error: Do not have permision for this command.") return end
+    if not(rank.hasPermision(plyRank, chatCommand)) then print("Error: Do not have permision for this command.") return end
 
     if(possibleTarget) then
         local target = possibleTarget[1]
