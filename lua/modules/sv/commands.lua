@@ -49,10 +49,12 @@ local function chatCommandHandler(len, ply)
         if(possibleTarget and #possibleTarget < 1) then print("Error: Found no targets.") return end
 
         local target = possibleTarget[1]
+        -- Remove target from args
+        table.remove(args, 1)
 
-        chatCommand.CommandFunc(ply, target, args)
+        chatCommand.commandFunc(ply, target, args)
     else
-        chatCommand.CommandFunc(ply, args)
+        chatCommand.commandFunc(ply, args)
     end
 end
 

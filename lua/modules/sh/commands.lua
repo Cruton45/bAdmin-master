@@ -10,24 +10,24 @@ command.__index = command
 
 function command.new(cmdName)
     local self = setmetatable(self or {},command)
-    self.Name = cmdName:lower() or "Unamed"
-    self.UseCase = self.UseCase or "Error" 
-    self.Description = self.Description or "Error"
-    self.Category = self.Category or "Error"
-    self.Immunity = self.Immunity or 0
+    self.name = cmdName:lower() or "Unamed"
+    self.useCase = self.useCase or "Error" 
+    self.description = self.description or "Error"
+    self.category = self.category or "Error"
+    self.immunity = self.immunity or 0
     self.hasTarget = self.hasTarget or true
-    self.CommandFunc = function()
+    self.commandFunc = function()
         print("Error: Command Func Nil")
     end
 
-    commands[self.Name] = self
+    commands[self.name] = self
 
     return self
 end
 
 function command.printAllCommands()
     for k, v in pairs(commands) do
-        print(k, v.Description)
+        print(k, v.description)
     end
 end
 
@@ -40,13 +40,7 @@ function command.commandExist(commandName)
 end
 
 function command.getCommand(commandName)
-    local possibleCommand = commands[commandName]
-
-    if(possibleCommand) then
-        return possibleCommand
-    else
-        return nil
-    end
+    return commands[commandName]
 end
 
 bAdmin.command = command

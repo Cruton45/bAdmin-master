@@ -28,7 +28,7 @@ local superadmin = {
     name = "superadmin",
     immunity = 100,
     inherit = "admin",
-    permissions = {"bring", "addbot", "addrank", "removerank"}
+    permissions = {"bring", "addbot", "addrank", "removerank", "adduser"}
 }
 
 ranks[user.name] = user
@@ -73,9 +73,15 @@ end
 function rank.hasPermision(rankName, permission)
     local userRank = ranks[rankName]
     if not(userRank) then print("Error: Rank hasPermision could not find rank. sv/ranks.lua") return false end
-    if not(table.HasValue(userRank.permissions, permission.Name)) then return false end
+    if not(table.HasValue(userRank.permissions, permission.name)) then return false end
 
     return true 
+end
+
+function rank.getRank(rankName)
+    print(rankName)
+    print(ranks[rankName].name)
+    return ranks[rankName]
 end
 
 bAdmin.rank = rank

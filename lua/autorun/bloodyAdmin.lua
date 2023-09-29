@@ -1,5 +1,4 @@
 bAdmin = {}
-bAdmin.player = {}
 
 ----------------------------- Module Loading -------------------------------------------
 -- Shared ------------------------------------------------------------------------------
@@ -16,6 +15,7 @@ if SERVER then
     include("modules/sv/teleport.lua")
     include("modules/sv/bot.lua")
     include("modules/sv/ranks.lua")
+    include("modules/sv/player.lua")
     include("modules/sv/rankCommands.lua")
     include("modules/sv/commands.lua")
 end
