@@ -34,23 +34,25 @@ local function immunityCheck(caller, target)
 end
 
 local function chatCommandHandler(len, ply)
-    local chatCommand = net.ReadString()
+    local commandString = net.ReadString()
+    local chatCommand = command.getCommand(commandString)
     local args = net.ReadTable()
     local plyRank = ply:GetUserGroup()
 
-    if not(command.CommandExist(chatCommand)) then print("Error: Command does not exist.") return end
-
-    local possibleTarget = getPlayersByName(args[1])
-
-    if(possibleTarget and #possibleTarget > 1) then print("Error: Found more than one targets.") return end
-    if(possibleTarget and #possibleTarget < 1) then print("Error: Found no targets.") return end
+    if not(chatCommand) then print("Error: Command does not exist.") return end
     if not(rank.hasPermision(plyRank, chatCommand)) then print("Error: Do not have permision for this command.") return end
 
-    if(possibleTarget) then
+    if(chatCommand.hasTarget) then
+        local possibleTarget = getPlayersByName(args[1])
+
+        if(possibleTarget and #possibleTarget > 1) then print("Error: Found more than one targets.") return end
+        if(possibleTarget and #possibleTarget < 1) then print("Error: Found no targets.") return end
+
         local target = possibleTarget[1]
-        command.Execute(chatCommand, ply, target, args)
+
+        chatCommand.CommandFunc(ply, target, args)
     else
-        command.Execute(chatCommand, ply, args)
+        chatCommand.CommandFunc(ply, args)
     end
 end
 

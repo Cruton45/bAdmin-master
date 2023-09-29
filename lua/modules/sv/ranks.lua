@@ -28,13 +28,18 @@ local superadmin = {
     name = "superadmin",
     immunity = 100,
     inherit = "admin",
-    permissions = {"bring", "addbot"}
+    permissions = {"bring", "addbot", "addrank"}
 }
 
 ranks[user.name] = user
 ranks[admin.name] = admin
 ranks[superadmin.name] = superadmin
 ---------------------------------------------
+
+function rank.printAllRanks()
+    PrintTable(ranks)
+end
+
 
 function rank.addRank(name, immunity, inherit)
     if not(utility.isAlpha(name)) then print("Error: rank names can only have letters in them.") return end
@@ -45,23 +50,21 @@ function rank.addRank(name, immunity, inherit)
         name = name,
         immunity = immunity,
         inherit = inherit,
-        permissions = {}
+        permissions = ranks[inherit].permissions
     }
     ranks[newRank.name] = newRank
+
+    rank.printAllRanks()
 end
 
 function rank.getAllRanks()
     return ranks
 end
 
-function rank.printAllRanks()
-    PrintTable(ranks)
-end
-
-function rank.hasPermision(rankName, permissionName)
+function rank.hasPermision(rankName, permission)
     local userRank = ranks[rankName]
     if not(userRank) then print("Error: Rank hasPermision could not find rank. sv/ranks.lua") return false end
-    if not(table.HasValue(userRank.permissions, permissionName)) then return false end
+    if not(table.HasValue(userRank.permissions, permission.Name)) then return false end
 
     return true 
 end

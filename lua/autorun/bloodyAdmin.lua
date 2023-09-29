@@ -16,6 +16,7 @@ if SERVER then
     include("modules/sv/teleport.lua")
     include("modules/sv/bot.lua")
     include("modules/sv/ranks.lua")
+    include("modules/sv/rankCommands.lua")
     include("modules/sv/commands.lua")
 end
 -- Client ------------------------------------------------------------------------------

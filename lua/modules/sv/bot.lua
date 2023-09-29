@@ -3,11 +3,13 @@ print("Bot Module Intialized.")
 local bAdmin = bAdmin
 local command = bAdmin.command
 
-bringCmd = command.new("addbot")
-bringCmd.Description = "Adds a bot to the server."
-bringCmd.Category = "Error"
-bringCmd.Immunity = 7
-bringCmd.CommandFunc = function(ply, args)
+addBotCmd = command.new("addbot")
+addBotCmd.UseCase = "!addbot"
+addBotCmd.Description = "Adds a bot to the server."
+addBotCmd.Category = "Error"
+addBotCmd.Immunity = 7
+addBotCmd.hasTarget = false
+addBotCmd.CommandFunc = function(ply, args)
     RunConsoleCommand("bot", "1")
 end
 

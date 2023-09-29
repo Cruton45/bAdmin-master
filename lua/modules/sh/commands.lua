@@ -6,12 +6,16 @@ local command = {}
 
 command.__index = command
 
+---- Add hasTarget as boolean for commands class
+
 function command.new(cmdName)
     local self = setmetatable(self or {},command)
-    self.Name = cmdName:lower() or "unamed"
+    self.Name = cmdName:lower() or "Unamed"
+    self.UseCase = self.UseCase or "Error" 
     self.Description = self.Description or "Error"
     self.Category = self.Category or "Error"
     self.Immunity = self.Immunity or 0
+    self.hasTarget = self.hasTarget or true
     self.CommandFunc = function()
         print("Error: Command Func Nil")
     end
@@ -27,7 +31,7 @@ function command.printAllCommands()
     end
 end
 
-function command.CommandExist(commandName)
+function command.commandExist(commandName)
     if(commands[commandName]) then
         return true
     else
@@ -35,8 +39,14 @@ function command.CommandExist(commandName)
     end
 end
 
-function command.Execute(commandName, ply, target)
-    commands[commandName].CommandFunc(ply, target)
+function command.getCommand(commandName)
+    local possibleCommand = commands[commandName]
+
+    if(possibleCommand) then
+        return possibleCommand
+    else
+        return nil
+    end
 end
 
 bAdmin.command = command
