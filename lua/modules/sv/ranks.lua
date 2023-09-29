@@ -28,7 +28,7 @@ local superadmin = {
     name = "superadmin",
     immunity = 100,
     inherit = "admin",
-    permissions = {"bring", "addbot", "addrank"}
+    permissions = {"bring", "addbot", "addrank", "removerank"}
 }
 
 ranks[user.name] = user
@@ -53,6 +53,15 @@ function rank.addRank(name, immunity, inherit)
         permissions = ranks[inherit].permissions
     }
     ranks[newRank.name] = newRank
+
+    rank.printAllRanks()
+end
+
+function rank.removeRank(name)
+    if not(ranks[name]) then print("Error: that rank does not exist.") return end
+    if(name == user.name or name == superadmin.name) then print("Error you can not remove that rank.") return end
+
+    ranks[name] = nil
 
     rank.printAllRanks()
 end

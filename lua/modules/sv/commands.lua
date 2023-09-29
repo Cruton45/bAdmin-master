@@ -56,5 +56,7 @@ local function chatCommandHandler(len, ply)
     end
 end
 
+command.printAllCommands()
+
 net.Receive( "sendCommandToServer",  chatCommandHandler)
 util.AddNetworkString("sendCommandToServer")
