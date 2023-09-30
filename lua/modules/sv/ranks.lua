@@ -79,8 +79,6 @@ function rank.hasPermision(rankName, permission)
 end
 
 function rank.getRank(rankName)
-    print(rankName)
-    print(ranks[rankName].name)
     return ranks[rankName]
 end
 

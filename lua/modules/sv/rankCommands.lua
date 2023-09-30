@@ -4,6 +4,7 @@ local bAdmin = bAdmin
 local command = bAdmin.command
 local _player = bAdmin.player
 local rank = bAdmin.rank
+local utility = bAdmin.util
 
 local addRankCmd = command.new("addrank")
 addRankCmd.useCase = "!addrank <rank_name> <rank_immunity> <rank_inheritance>"
@@ -45,5 +46,8 @@ addUserCmd.commandFunc = function(ply, target, args)
     local name = args[1]
     if not(name) then print("Error: You did not use adduser correctly.\nCorrect use: " .. addUserCmd.useCase) return end
 
-    _player.setRank(target, name)
+    local success = _player.setRank(target, name)
+    if(success) then 
+        utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
+    end
 end
