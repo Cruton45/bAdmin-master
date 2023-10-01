@@ -13,8 +13,16 @@ function _player.setRank(target, rankName)
     if(target:GetUserGroup() == rankName) then print("Error: The user is already that rank.") return false end
     
     target:SetUserGroup(possibleRank.name)
-    
+
     return true 
+end
+
+function _player.setNoclip(target)
+    if(target:GetMoveType() == MOVETYPE_WALK ) then
+        target:SetMoveType(MOVETYPE_NOCLIP)
+    elseif(target:GetMoveType() == MOVETYPE_NOCLIP) then
+        target:SetMoveType(MOVETYPE_WALK)
+    end
 end
 
 bAdmin.player = _player

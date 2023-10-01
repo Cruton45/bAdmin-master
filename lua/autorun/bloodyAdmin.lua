@@ -12,10 +12,10 @@ include("modules/sh/cami.lua")
 include("modules/sh/util.lua")
 -- Server ------------------------------------------------------------------------------
 if SERVER then
-    include("modules/sv/teleport.lua")
     include("modules/sv/bot.lua")
     include("modules/sv/ranks.lua")
     include("modules/sv/player.lua")
+    include("modules/sv/teleport.lua")
     include("modules/sv/rankCommands.lua")
     include("modules/sv/commands.lua")
     include("modules/sv/notification.lua")
