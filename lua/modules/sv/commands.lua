@@ -7,7 +7,7 @@ local rank = bAdmin.rank
 local function getPlayersByName(name)
     local found = {}
 
-    if not(name) then return nil end
+    if not(name) then return {} end
     
     for k, v in ipairs(player.GetAll()) do
         if string.find(string.lower(v:Nick()), string.lower(name)) then
@@ -39,14 +39,14 @@ local function chatCommandHandler(len, ply)
     local args = net.ReadTable()
     local plyRank = ply:GetUserGroup()
 
-    if not(chatCommand) then print("Error: Command does not exist.") return end
-    if not(rank.hasPermision(plyRank, chatCommand)) then print("Error: Do not have permision for this command.") return end
+    if not(chatCommand) then command.commandError(commandString .. " command does not exist.") return end
+    if not(rank.hasPermision(plyRank, chatCommand)) then command.commandError(plyRank .. "does not have permisions to " .. chatCommand.name) return end
 
     if(chatCommand.hasTarget) then
         local possibleTarget = getPlayersByName(args[1])
 
-        if(possibleTarget and #possibleTarget > 1) then print("Error: Found more than one targets.") return end
-        if(possibleTarget and #possibleTarget < 1) then print("Error: Found no targets.") return end
+        if(#possibleTarget > 1) then command.commandError("Found more than one targets.") return end
+        if(#possibleTarget < 1) then command.commandError("Found no targets.") return end
 
         local target = possibleTarget[1]
         -- Remove target from args

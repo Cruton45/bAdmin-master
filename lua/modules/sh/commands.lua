@@ -43,5 +43,14 @@ function command.getCommand(commandName)
     return commands[commandName]
 end
 
+function command.commandError(caller, errorString)
+    print(caller)
+    hook.Run( "bAdmin_chatCommandFailure", caller, errorString)
+end
+
+function command.useCaseError(caller, usedCommand)
+    --hook.Run( "bAdmin_notifyCommandCaller", "You did not use " .. usedCommand.name .. "correctly.\n Correct use is: " .. usedCommand.useCase)
+end
+
 bAdmin.command = command
 bAdmin.commands = commands

@@ -18,7 +18,7 @@ addRankCmd.commandFunc = function(ply, args)
     local immunity = tonumber(args[2])
     local inherit = args[3]
 
-    if not(name or immunity or inherit) then print("Error: You did not use adduser correctly.\nCorrect use: " .. addRankCmd.useCase) return end
+    if not(name or immunity or inherit) then command.useCaseError(addRankCmd) return end
 
     rank.addRank(name, immunity, inherit)
 end
@@ -31,9 +31,9 @@ removeRankCmd.immunity = 7
 removeRankCmd.hasTarget = false
 removeRankCmd.commandFunc = function(ply, args)
     local name = args[1]
-    if not(name) then print("Error: You did not use adduser correctly.\nCorrect use: " .. removeRankCmd.useCase) return end
+    if not(name) then command.useCaseError(ply, removeRankCmd) return end
 
-    rank.removeRank(name)
+    rank.removeRank(ply, name)
 end
 
 local addUserCmd = command.new("adduser")
@@ -44,9 +44,9 @@ addUserCmd.immunity = 7
 addUserCmd.hasTarget = true
 addUserCmd.commandFunc = function(ply, target, args)
     local name = args[1]
-    if not(name) then print("Error: You did not use adduser correctly.\nCorrect use: " .. addUserCmd.useCase) return end
+    if not(name) then command.useCaseError(addUserCmd) return end
 
-    local success = _player.setRank(target, name)
+    local success = _player.setRank(ply, target, name)
     if(success) then 
         utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
     end

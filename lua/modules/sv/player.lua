@@ -6,11 +6,11 @@ local rank = bAdmin.rank
 
 local _player = {}
 
-function _player.setRank(target, rankName)
+function _player.setRank(caller, target, rankName)
     possibleRank = rank.getRank(rankName)
 
-    if not(possibleRank) then print("Error: That rank does not exist.") return false end
-    if(target:GetUserGroup() == rankName) then print("Error: The user is already that rank.") return false end
+    if not(possibleRank) then command.commandError(caller, rankName .. " does not exist.") return false end
+    if(target:GetUserGroup() == rankName) then command.commandError(caller, target:Nick() .. " is already " .. rankName .. ".") return false end
     
     target:SetUserGroup(possibleRank.name)
 

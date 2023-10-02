@@ -1,4 +1,5 @@
 local bAdmin = bAdmin
+local command = bAdmin.command
 local utility = bAdmin.util
 local rank = {}
 local ranks = {}
@@ -42,9 +43,9 @@ end
 
 
 function rank.addRank(name, immunity, inherit)
-    if not(utility.isAlpha(name)) then print("Error: rank names can only have letters in them.") return end
-    if(ranks[name]) then print("Error: that rank already exists.") return end
-    if not(ranks[inherit]) then print("Error: cannont inherit from that rank. It does not exist.") return end
+    if not(utility.isAlpha(name)) then command.commandError(name .. " is an invalid rank name. Names can only have letters in them.") return end
+    if(ranks[name]) then command.commandError(name .. " already exists.") return end
+    if not(ranks[inherit]) then command.commandError("Cannont inherit from " .. inherit .. "." ..  " It does not exist.") return end
 
     local newRank = {
         name = name,
@@ -57,9 +58,9 @@ function rank.addRank(name, immunity, inherit)
     rank.printAllRanks()
 end
 
-function rank.removeRank(name)
-    if not(ranks[name]) then print("Error: that rank does not exist.") return end
-    if(name == user.name or name == superadmin.name) then print("Error you can not remove that rank.") return end
+function rank.removeRank(caller, name)
+    if not(ranks[name]) then command.commandError(caller, name .. " does not exist.") return end
+    if(name == user.name or name == superadmin.name) then command.commandError(caller, "You can not remove " .. name .. ". It is a default rank.") return end
 
     ranks[name] = nil
 
