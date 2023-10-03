@@ -22,7 +22,7 @@ if SERVER then
 end
 -- Client ------------------------------------------------------------------------------
 if SERVER then
-    AddCSLuaFile("modules/cl/chatCommand.lua")
+    AddCSLuaFile("modules/cl/command.lua")
     AddCSLuaFile("modules/cl/notification.lua")
 end
 if CLIENT then
