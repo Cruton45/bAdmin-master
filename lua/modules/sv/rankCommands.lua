@@ -28,7 +28,6 @@ addRankCmd.commandFunc = function(ply, args)
     end
 end
 
--- Much better
 local removeRankCmd = command.new("removerank")
 removeRankCmd.useCase = "!removerank <rank_name>"
 removeRankCmd.description = "Remove a user rank."
@@ -48,8 +47,8 @@ removeRankCmd.commandFunc = function(ply, args)
 end
 -------------
 
-local addUserCmd = command.new("adduser")
-addUserCmd.useCase = "!adduser <player_name><rank_name>"
+local addUserCmd = command.new("setuser")
+addUserCmd.useCase = "!setuser <player_name><rank_name>"
 addUserCmd.description = "Add a user to the rank."
 addUserCmd.category = "Error"
 addUserCmd.immunity = 7

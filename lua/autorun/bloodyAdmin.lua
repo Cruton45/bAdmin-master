@@ -26,7 +26,7 @@ if SERVER then
     AddCSLuaFile("modules/cl/notification.lua")
 end
 if CLIENT then
-    include("modules/cl/chatCommand.lua")
+    include("modules/cl/command.lua")
     include("modules/cl/notification.lua")
 end
 -----------------------------------------------------------------------------------------

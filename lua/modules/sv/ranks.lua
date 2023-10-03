@@ -8,6 +8,7 @@ local rankStruct = {
     name = "error",
     immunity = 0,
     inherit = "error"
+    permissions = {}
 }
 
 ---- Initialize default ranks ---------------
@@ -29,7 +30,7 @@ local superadmin = {
     name = "superadmin",
     immunity = 100,
     inherit = "admin",
-    permissions = {"bring", "addbot", "addrank", "removerank", "adduser", "noclip"}
+    permissions = {"bring", "addbot", "addrank", "removerank", "setuser", "noclip"}
 }
 
 ranks[user.name] = user
@@ -55,8 +56,6 @@ function rank.addRank(name, immunity, inherit)
     }
     ranks[newRank.name] = newRank
 
-    rank.printAllRanks()
-
     return true
 end
 
@@ -65,8 +64,6 @@ function rank.removeRank(name)
     if(name == user.name or name == superadmin.name) then return false, ("You can not remove " .. name .. ". It is a default rank.") end
 
     ranks[name] = nil
-
-    rank.printAllRanks()
 
     return true 
 end
