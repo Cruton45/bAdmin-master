@@ -22,7 +22,7 @@ addRankCmd.commandFunc = function(ply, args)
 
     local success, reason = rank.addRank(name, immunity, inherit)
     if(success) then 
-        utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
+        return
     else
         command.commandError(ply, reason)
     end

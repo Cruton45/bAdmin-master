@@ -7,7 +7,7 @@ local ranks = {}
 local rankStruct = {
     name = "error",
     immunity = 0,
-    inherit = "error"
+    inherit = "error",
     permissions = {}
 }
 
