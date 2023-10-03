@@ -39,14 +39,14 @@ local function chatCommandHandler(len, ply)
     local args = net.ReadTable()
     local plyRank = ply:GetUserGroup()
 
-    if not(chatCommand) then command.commandError(commandString .. " command does not exist.") return end
-    if not(rank.hasPermision(plyRank, chatCommand)) then command.commandError(plyRank .. "does not have permisions to " .. chatCommand.name) return end
+    if not(chatCommand) then command.commandError(ply, commandString .. " command does not exist.") return end
+    if not(rank.hasPermision(plyRank, chatCommand)) then command.commandError(ply, plyRank .. "does not have permisions to " .. chatCommand.name) return end
 
     if(chatCommand.hasTarget) then
         local possibleTarget = getPlayersByName(args[1])
 
-        if(#possibleTarget > 1) then command.commandError("Found more than one targets.") return end
-        if(#possibleTarget < 1) then command.commandError("Found no targets.") return end
+        if(#possibleTarget > 1) then command.commandError(ply, "Found more than one targets.") return end
+        if(#possibleTarget < 1) then command.commandError(ply, "Found no targets.") return end
 
         local target = possibleTarget[1]
         -- Remove target from args

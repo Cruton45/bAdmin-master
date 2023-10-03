@@ -10,7 +10,6 @@ local function commandBroadcast(broadcastString)
 end
 
 local function commandErrorNotify(caller, notifyString)
-    print(caller)
     if not(notifyString) then print("Error: Server broadcast failed. Broadcast string is nil.") return end
     if not(isstring(notifyString)) then print("Error: Server broadcast failed. Passed a values that wasn't a string.") return end
 

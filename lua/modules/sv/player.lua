@@ -9,8 +9,8 @@ local _player = {}
 function _player.setRank(caller, target, rankName)
     possibleRank = rank.getRank(rankName)
 
-    if not(possibleRank) then command.commandError(caller, rankName .. " does not exist.") return false end
-    if(target:GetUserGroup() == rankName) then command.commandError(caller, target:Nick() .. " is already " .. rankName .. ".") return false end
+    if not(possibleRank) then return false, (rankName .. " does not exist.")end
+    if(target:GetUserGroup() == rankName) then return false, (rankName .. " does not exist.") end
     
     target:SetUserGroup(possibleRank.name)
 

@@ -44,7 +44,6 @@ function command.getCommand(commandName)
 end
 
 function command.commandError(caller, errorString)
-    print(caller)
     hook.Run( "bAdmin_chatCommandFailure", caller, errorString)
 end
 

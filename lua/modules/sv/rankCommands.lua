@@ -20,9 +20,15 @@ addRankCmd.commandFunc = function(ply, args)
 
     if not(name or immunity or inherit) then command.useCaseError(addRankCmd) return end
 
-    rank.addRank(name, immunity, inherit)
+    local success, reason = rank.addRank(name, immunity, inherit)
+    if(success) then 
+        utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
+    else
+        command.commandError(ply, reason)
+    end
 end
 
+-- Much better
 local removeRankCmd = command.new("removerank")
 removeRankCmd.useCase = "!removerank <rank_name>"
 removeRankCmd.description = "Remove a user rank."
@@ -33,8 +39,14 @@ removeRankCmd.commandFunc = function(ply, args)
     local name = args[1]
     if not(name) then command.useCaseError(ply, removeRankCmd) return end
 
-    rank.removeRank(ply, name)
+    local success, reason = rank.removeRank(name)
+    if(success) then 
+        return
+    else
+        command.commandError(ply, reason)
+    end
 end
+-------------
 
 local addUserCmd = command.new("adduser")
 addUserCmd.useCase = "!adduser <player_name><rank_name>"
@@ -46,8 +58,10 @@ addUserCmd.commandFunc = function(ply, target, args)
     local name = args[1]
     if not(name) then command.useCaseError(addUserCmd) return end
 
-    local success = _player.setRank(ply, target, name)
+    local success, reason = _player.setRank(ply, target, name)
     if(success) then 
         utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
+    else
+        command.commandError(ply, reason)
     end
 end

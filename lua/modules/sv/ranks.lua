@@ -43,9 +43,9 @@ end
 
 
 function rank.addRank(name, immunity, inherit)
-    if not(utility.isAlpha(name)) then command.commandError(name .. " is an invalid rank name. Names can only have letters in them.") return end
-    if(ranks[name]) then command.commandError(name .. " already exists.") return end
-    if not(ranks[inherit]) then command.commandError("Cannont inherit from " .. inherit .. "." ..  " It does not exist.") return end
+    if not(utility.isAlpha(name)) then return false, (name .. " is an invalid rank name. Names can only have letters in them.") end
+    if(ranks[name]) then return false, (name .. " already exists.") end
+    if not(ranks[inherit]) then return false, ("Cannont inherit from " .. inherit .. "." ..  " It does not exist.") end
 
     local newRank = {
         name = name,
@@ -56,15 +56,19 @@ function rank.addRank(name, immunity, inherit)
     ranks[newRank.name] = newRank
 
     rank.printAllRanks()
+
+    return true
 end
 
-function rank.removeRank(caller, name)
-    if not(ranks[name]) then command.commandError(caller, name .. " does not exist.") return end
-    if(name == user.name or name == superadmin.name) then command.commandError(caller, "You can not remove " .. name .. ". It is a default rank.") return end
+function rank.removeRank(name)
+    if not(ranks[name]) then return false, ( name .. " does not exist.") end
+    if(name == user.name or name == superadmin.name) then return false, ("You can not remove " .. name .. ". It is a default rank.") end
 
     ranks[name] = nil
 
     rank.printAllRanks()
+
+    return true 
 end
 
 function rank.getAllRanks()
