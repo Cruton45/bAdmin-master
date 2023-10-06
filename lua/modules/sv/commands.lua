@@ -58,7 +58,35 @@ local function chatCommandHandler(len, ply)
     end
 end
 
+local function consoleCommandHandler(ply, cmd, args)
+    -- Ply is a null ent here if used by server console.
+    local commandString = args[1]
+    if not(command.commandExist(commandString)) then print("BAdmin Error: " .. commandString .. " does not exist.") return end
+    -- Remove command string from args
+    table.remove(args, 1)
+
+    usedCommand = command.getCommand(commandString)
+
+    if not(usedCommand.canServerConsole) then print("BAdmin Error: " .. commandString .. " can not be used by server console.") return end
+
+    if(usedCommand.hasTarget) then
+        local possibleTarget = getPlayersByName(args[1])
+
+        if(#possibleTarget > 1) then print("BAdmin Error: Found multiple targets.") return end
+        if(#possibleTarget < 1) then print("BAdmin Error: Found no targets.") return end
+
+        local target = possibleTarget[1]
+        -- Remove target from args
+        table.remove(args, 1)
+
+        usedCommand.commandFunc(ply, target, args)
+    else
+        usedCommand.commandFunc(ply, args)
+    end
+end
+
 command.printAllCommands()
 
 net.Receive( "sendCommandToServer",  chatCommandHandler)
 util.AddNetworkString("sendCommandToServer")
+concommand.Add("badmin", consoleCommandHandler)

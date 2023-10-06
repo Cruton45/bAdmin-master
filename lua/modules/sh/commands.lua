@@ -16,6 +16,7 @@ function command.new(cmdName)
     self.category = self.category or "Error"
     self.immunity = self.immunity or 0
     self.hasTarget = self.hasTarget or true
+    self.canServerConsole = self.canServerConsole or false
     self.commandFunc = function()
         print("Error: Command Func Nil")
     end

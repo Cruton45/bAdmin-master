@@ -12,6 +12,7 @@ addRankCmd.description = "Add a new user rank."
 addRankCmd.category = "Error"
 addRankCmd.immunity = 7
 addRankCmd.hasTarget = false
+addRankCmd.canServerConsole = true
 addRankCmd.commandFunc = function(ply, args)
     -- Run check on args to make sure there are strings and ints where needed
     local name = args[1]
@@ -24,7 +25,12 @@ addRankCmd.commandFunc = function(ply, args)
     if(success) then 
         return
     else
-        command.commandError(ply, reason)
+        -- Refactor this
+        if(utility.isCallerServerConsole(ply)) then
+            print("BAdmin Error: " .. reason)
+        else
+            command.commandError(ply, reason)
+        end
     end
 end
 
@@ -34,6 +40,7 @@ removeRankCmd.description = "Remove a user rank."
 removeRankCmd.category = "Error"
 removeRankCmd.immunity = 7
 removeRankCmd.hasTarget = false
+removeRankCmd.canServerConsole = true
 removeRankCmd.commandFunc = function(ply, args)
     local name = args[1]
     if not(name) then command.useCaseError(ply, removeRankCmd) return end
@@ -42,7 +49,12 @@ removeRankCmd.commandFunc = function(ply, args)
     if(success) then 
         return
     else
-        command.commandError(ply, reason)
+        -- Refactor this
+        if(utility.isCallerServerConsole(ply)) then
+            print("BAdmin Error: " .. reason)
+        else
+            command.commandError(ply, reason)
+        end
     end
 end
 -------------
@@ -53,14 +65,22 @@ addUserCmd.description = "Add a user to the rank."
 addUserCmd.category = "Error"
 addUserCmd.immunity = 7
 addUserCmd.hasTarget = true
+addUserCmd.canServerConsole = true
 addUserCmd.commandFunc = function(ply, target, args)
     local name = args[1]
     if not(name) then command.useCaseError(addUserCmd) return end
 
-    local success, reason = _player.setRank(ply, target, name)
+    local callerName = utility.getConsoleOrPlayerName(ply)
+
+    local success, reason = _player.setRank(target, name)
     if(success) then 
-        utility.logCommand(addUserCmd, ply:Nick() .. " has set " .. target:Nick() .. " to " .. name .. ".")
+        utility.logCommand(addUserCmd, callerName .. " has set " .. target:Nick() .. " to " .. name .. ".")
     else
-        command.commandError(ply, reason)
+        -- Refactor this
+        if(utility.isCallerServerConsole(ply)) then
+            print("BAdmin Error: " .. reason)
+        else
+            command.commandError(ply, reason)
+        end
     end
 end

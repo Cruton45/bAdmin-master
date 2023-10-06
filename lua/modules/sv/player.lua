@@ -6,7 +6,7 @@ local rank = bAdmin.rank
 
 local _player = {}
 
-function _player.setRank(caller, target, rankName)
+function _player.setRank(target, rankName)
     possibleRank = rank.getRank(rankName)
 
     if not(possibleRank) then return false, (rankName .. " does not exist.")end

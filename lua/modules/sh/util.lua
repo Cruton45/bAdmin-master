@@ -16,4 +16,23 @@ function utility.logCommand(usedCommand, str)
     hook.Run( "bAdmin_commandSuccess", str)
 end
 
+function utility.isCallerServerConsole(caller)
+    -- Caller will be a null ent if console
+    if not(caller[1]) then
+        return true
+    end
+    return false
+end
+
+function utility.getConsoleOrPlayerName(caller)
+    local callerName
+    if(caller[1]) then
+        callerName = ply:Nick()
+    else
+        callerName = "CONSOLE"
+    end
+
+    return callerName
+end
+
 bAdmin.util = utility

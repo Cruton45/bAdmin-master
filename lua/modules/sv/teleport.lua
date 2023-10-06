@@ -12,7 +12,8 @@ bringCmd.useCase = "!bring <playername>"
 bringCmd.description = "Brings a player."
 bringCmd.category = "Error"
 bringCmd.immunity = 7
-bringCmd.hasTarget = true 
+bringCmd.hasTarget = true
+bringCmd.canServerConsole = false  
 bringCmd.commandFunc = function(ply, target, args)
     futurePosition = ply:GetPos() + TP_OFFSET
     target:SetPos(futurePosition)
@@ -26,7 +27,8 @@ noclipCommand.useCase = "!noclip"
 noclipCommand.description = "Noclips a player."
 noclipCommand.category = "Error"
 noclipCommand.immunity = 7
-noclipCommand.hasTarget = false 
+noclipCommand.hasTarget = false
+noclipCommand.canServerConsole = false 
 noclipCommand.commandFunc = function(ply, args)
     _player.setNoclip(ply)
 end
