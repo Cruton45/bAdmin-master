@@ -6,6 +6,8 @@ local function commandHandler(ply, cmd, args)
 
 	table.remove(args, 1)
 
+	local clientCommand = command.getCommand(chatCommand)
+
 	net.Start("sendCommandToServer")
 	net.WriteString(chatCommand)
 	net.WriteTable(args)

@@ -26,7 +26,7 @@ end
 
 function utility.getConsoleOrPlayerName(caller)
     local callerName
-    if(caller[1]) then
+    if (caller[1]) then
         callerName = ply:Nick()
     else
         callerName = "CONSOLE"

@@ -8,7 +8,7 @@ local function getPlayersByName(name)
     local found = {}
 
     if not(name) then return {} end
-    
+ 
     for k, v in ipairs(player.GetAll()) do
         if string.find(string.lower(v:Nick()), string.lower(name)) then
             table.insert(found, v)
@@ -19,14 +19,13 @@ local function getPlayersByName(name)
 end
 
 local function immunityCheck(caller, target)
-	
-	callerRank = caller:GetUserGroup()
+    callerRank = caller:GetUserGroup()
 	targetRank = target:GetUserGroup()
 	callerImmunity = JS_ALLOWED_RANKS[callerRank]
 	targetImmunity = JS_ALLOWED_RANKS[targetRank]
-	if(targetImmunity == nil) then
+	if (targetImmunity == nil) then
 		return true
-	elseif(callerImmunity >= targetImmunity) then
+	elseif (callerImmunity >= targetImmunity) then
 		return true
 	else
 		return false

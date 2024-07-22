@@ -1,10 +1,10 @@
 local bAdmin = bAdmin
-local command = bAdmin.command
+local _command = bAdmin.command
 local utility = bAdmin.util
 local rank = {}
 local ranks = {}
 
-local rankStruct = {
+local _rankStruct = {
     name = "error",
     immunity = 0,
     inherit = "error",
@@ -45,7 +45,7 @@ end
 
 function rank.addRank(name, immunity, inherit)
     if not(utility.isAlpha(name)) then return false, (name .. " is an invalid rank name. Names can only have letters in them.") end
-    if(ranks[name]) then return false, (name .. " already exists.") end
+    if (ranks[name]) then return false, (name .. " already exists.") end
     if not(ranks[inherit]) then return false, ("Cannont inherit from " .. inherit .. "." ..  " It does not exist.") end
 
     local newRank = {
@@ -61,11 +61,11 @@ end
 
 function rank.removeRank(name)
     if not(ranks[name]) then return false, ( name .. " does not exist.") end
-    if(name == user.name or name == superadmin.name) then return false, ("You can not remove " .. name .. ". It is a default rank.") end
+    if (name == user.name or name == superadmin.name) then return false, ("You can not remove " .. name .. ". It is a default rank.") end
 
     ranks[name] = nil
 
-    return true 
+    return true
 end
 
 function rank.getAllRanks()
@@ -77,7 +77,7 @@ function rank.hasPermision(rankName, permission)
     if not(userRank) then print("Error: Rank hasPermision could not find rank. sv/ranks.lua") return false end
     if not(table.HasValue(userRank.permissions, permission.name)) then return false end
 
-    return true 
+    return true
 end
 
 function rank.getRank(rankName)

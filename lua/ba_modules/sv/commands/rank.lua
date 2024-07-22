@@ -22,11 +22,11 @@ addRankCmd.commandFunc = function(ply, args)
     if not(name or immunity or inherit) then command.useCaseError(addRankCmd) return end
 
     local success, reason = rank.addRank(name, immunity, inherit)
-    if(success) then 
+    if (success) then
         return
     else
         -- Refactor this
-        if(utility.isCallerServerConsole(ply)) then
+        if (utility.isCallerServerConsole(ply)) then
             print("BAdmin Error: " .. reason)
         else
             command.commandError(ply, reason)
@@ -46,11 +46,11 @@ removeRankCmd.commandFunc = function(ply, args)
     if not(name) then command.useCaseError(ply, removeRankCmd) return end
 
     local success, reason = rank.removeRank(name)
-    if(success) then 
+    if (success) then
         return
     else
         -- Refactor this
-        if(utility.isCallerServerConsole(ply)) then
+        if (utility.isCallerServerConsole(ply)) then
             print("BAdmin Error: " .. reason)
         else
             command.commandError(ply, reason)
@@ -73,11 +73,11 @@ addUserCmd.commandFunc = function(ply, target, args)
     local callerName = utility.getConsoleOrPlayerName(ply)
 
     local success, reason = _player.setRank(target, name)
-    if(success) then 
+    if (success) then
         utility.logCommand(addUserCmd, callerName .. " has set " .. target:Nick() .. " to " .. name .. ".")
     else
         -- Refactor this
-        if(utility.isCallerServerConsole(ply)) then
+        if (utility.isCallerServerConsole(ply)) then
             print("BAdmin Error: " .. reason)
         else
             command.commandError(ply, reason)

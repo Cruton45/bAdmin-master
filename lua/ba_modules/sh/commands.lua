@@ -11,7 +11,7 @@ command.__index = command
 function command.new(cmdName)
     local self = setmetatable(self or {},command)
     self.name = cmdName:lower() or "Unamed"
-    self.useCase = self.useCase or "Error" 
+    self.useCase = self.useCase or "Error"
     self.description = self.description or "Error"
     self.category = self.category or "Error"
     self.immunity = self.immunity or 0
@@ -33,7 +33,7 @@ function command.printAllCommands()
 end
 
 function command.commandExist(commandName)
-    if(commands[commandName]) then
+    if (commands[commandName]) then
         return true
     else
         return false
