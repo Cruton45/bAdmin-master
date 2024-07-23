@@ -1,3 +1,5 @@
+if (bAdmin_IsLoaded) then return end
+
 local version = 1
 
 bAdmin = {}
