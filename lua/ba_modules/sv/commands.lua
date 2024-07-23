@@ -18,18 +18,18 @@ local function getPlayersByName(name)
     return found
 end
 
-local function immunityCheck(caller, target)
+local function _immunityCheck(caller, target)
     callerRank = caller:GetUserGroup()
-	targetRank = target:GetUserGroup()
-	callerImmunity = JS_ALLOWED_RANKS[callerRank]
-	targetImmunity = JS_ALLOWED_RANKS[targetRank]
-	if (targetImmunity == nil) then
-		return true
-	elseif (callerImmunity >= targetImmunity) then
-		return true
-	else
-		return false
-	end
+    targetRank = target:GetUserGroup()
+    callerImmunity = JS_ALLOWED_RANKS[callerRank]
+    targetImmunity = JS_ALLOWED_RANKS[targetRank]
+    if (targetImmunity == nil) then
+        return true
+    elseif (callerImmunity >= targetImmunity) then
+        return true
+    else
+        return false
+    end
 end
 
 local function chatCommandHandler(len, ply)
@@ -41,11 +41,11 @@ local function chatCommandHandler(len, ply)
     if not(chatCommand) then command.commandError(ply, commandString .. " command does not exist.") return end
     if not(rank.hasPermision(plyRank, chatCommand)) then command.commandError(ply, plyRank .. " does not have permisions to " .. chatCommand.name) return end
 
-    if(chatCommand.hasTarget) then
+    if (chatCommand.hasTarget) then
         local possibleTarget = getPlayersByName(args[1])
 
-        if(#possibleTarget > 1) then command.commandError(ply, "Found more than one targets.") return end
-        if(#possibleTarget < 1) then command.commandError(ply, "Found no targets.") return end
+        if (#possibleTarget > 1) then command.commandError(ply, "Found more than one targets.") return end
+        if (#possibleTarget < 1) then command.commandError(ply, "Found no targets.") return end
 
         local target = possibleTarget[1]
         -- Remove target from args
@@ -68,11 +68,11 @@ local function consoleCommandHandler(ply, cmd, args)
 
     if not(usedCommand.canServerConsole) then print("BAdmin Error: " .. commandString .. " can not be used by server console.") return end
 
-    if(usedCommand.hasTarget) then
+    if (usedCommand.hasTarget) then
         local possibleTarget = getPlayersByName(args[1])
 
-        if(#possibleTarget > 1) then print("BAdmin Error: Found multiple targets.") return end
-        if(#possibleTarget < 1) then print("BAdmin Error: Found no targets.") return end
+        if (#possibleTarget > 1) then print("BAdmin Error: Found multiple targets.") return end
+        if (#possibleTarget < 1) then print("BAdmin Error: Found no targets.") return end
 
         local target = possibleTarget[1]
         -- Remove target from args

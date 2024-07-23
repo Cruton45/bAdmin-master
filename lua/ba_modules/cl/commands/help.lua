@@ -16,11 +16,13 @@ helpCmd.commandFunc = function(ply, args)
     local rankObj = rank.getRank(ply:GetUserGroup())
     print("Bloody Admin Permissions")
 
-    for k, permission in ipairs(rankObj.permissions) do
+    for k, permissionName in ipairs(rankObj.permissions) do
+        print(permissionName)
+        local permission = command.getCommand(permissionName)
         print("------------------------------------")
         print(permission.name)
         print(permission.useCase)
         print(permission.description)
-        print(permissions.category)
+        print(permission.category)
     end
 end

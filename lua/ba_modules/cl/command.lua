@@ -1,12 +1,10 @@
 local bAdmin = bAdmin
-local command = bAdmin.command
+local _command = bAdmin.command
 
 local function commandHandler(ply, cmd, args)
 	local chatCommand = args[1]
 
 	table.remove(args, 1)
-
-	local clientCommand = command.getCommand(chatCommand)
 
 	net.Start("sendCommandToServer")
 	net.WriteString(chatCommand)

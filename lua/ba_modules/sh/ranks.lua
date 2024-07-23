@@ -42,7 +42,7 @@ function rank.printAllRanks()
     PrintTable(ranks)
 end
 
-
+-- Move to server side rank file.
 function rank.addRank(name, immunity, inherit)
     if not(utility.isAlpha(name)) then return false, (name .. " is an invalid rank name. Names can only have letters in them.") end
     if (ranks[name]) then return false, (name .. " already exists.") end
@@ -67,6 +67,7 @@ function rank.removeRank(name)
 
     return true
 end
+--------------------------------------------------------
 
 function rank.getAllRanks()
     return ranks
