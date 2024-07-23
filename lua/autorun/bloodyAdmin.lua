@@ -3,40 +3,44 @@ local version = 1
 bAdmin = {}
 bAdmin.version = version
 
+local ClientModules = file.Find("ba_modules/cl/*.lua", "LUA")
+local SharedModules = file.Find("ba_modules/sh/*.lua", "LUA")
+local ServerModules = file.Find("ba_modules/sv/*.lua", "LUA")
+local CommandModules = file.Find("ba_modules/sh/commands/*.lua", "LUA")
+
 ----------------------------- Module Loading -------------------------------------------
 -- Shared ------------------------------------------------------------------------------
-if SERVER then
-    AddCSLuaFile("ba_modules/sh/commands.lua")
-    AddCSLuaFile("ba_modules/sh/cami.lua")
-    AddCSLuaFile("ba_modules/sh/util.lua")
-    AddCSLuaFile("ba_modules/sh/ranks.lua")
-    AddCSLuaFile("ba_modules/sh/commands/teleport.lua")
-    AddCSLuaFile("ba_modules/sh/commands/rank.lua")
-    AddCSLuaFile("ba_modules/sh/commands/bot.lua")
+for _, modFile in ipairs(SharedModules) do
+    local modulePath = "ba_modules/sh/" .. modFile
+    if (SERVER) then
+        AddCSLuaFile(modulePath)
+    end
+    include(modulePath)
 end
-include("ba_modules/sh/commands.lua")
-include("ba_modules/sh/cami.lua")
-include("ba_modules/sh/util.lua")
-include("ba_modules/sh/ranks.lua")
-include("ba_modules/sh/commands/teleport.lua")
-include("ba_modules/sh/commands/rank.lua")
-include("ba_modules/sh/commands/bot.lua")
+
+for _, modFile in ipairs(CommandModules) do
+    local modulePath = "ba_modules/sh/commands/" .. modFile
+    if (SERVER) then
+        AddCSLuaFile(modulePath)
+    end
+    include(modulePath)
+end
 -- Server ------------------------------------------------------------------------------
-if SERVER then
-    include("ba_modules/sv/player.lua")
-    include("ba_modules/sv/commands.lua")
-    include("ba_modules/sv/notification.lua")
+for _, modFile in ipairs(ServerModules) do
+    local modulePath = "ba_modules/sv/" .. modFile
+    if (SERVER) then
+        include(modulePath)
+    end
 end
 -- Client ------------------------------------------------------------------------------
-if SERVER then
-    AddCSLuaFile("ba_modules/cl/command.lua")
-    AddCSLuaFile("ba_modules/cl/notification.lua")
-    AddCSLuaFile("ba_modules/cl/commands/help.lua")
-end
-if CLIENT then
-    include("ba_modules/cl/command.lua")
-    include("ba_modules/cl/notification.lua")
-    include("ba_modules/cl/commands/help.lua")
+for _, modFile in ipairs(ClientModules) do
+    local modulePath = "ba_modules/cl/" .. modFile
+    if (SERVER) then
+        AddCSLuaFile(modulePath)
+    end
+    if (CLIENT) then
+        include(modulePath)
+    end
 end
 -----------------------------------------------------------------------------------------
 bAdmin_IsLoaded = true
