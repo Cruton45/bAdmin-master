@@ -19,14 +19,6 @@ for _, modFile in ipairs(SharedModules) do
     end
     include(modulePath)
 end
-
-for _, modFile in ipairs(CommandModules) do
-    local modulePath = "ba_modules/sh/commands/" .. modFile
-    if (SERVER) then
-        AddCSLuaFile(modulePath)
-    end
-    include(modulePath)
-end
 -- Server ------------------------------------------------------------------------------
 for _, modFile in ipairs(ServerModules) do
     local modulePath = "ba_modules/sv/" .. modFile
@@ -43,6 +35,14 @@ for _, modFile in ipairs(ClientModules) do
     if (CLIENT) then
         include(modulePath)
     end
+end
+-- Command ------------------------------------------------------------------------------
+for _, modFile in ipairs(CommandModules) do
+    local modulePath = "ba_modules/sh/commands/" .. modFile
+    if (SERVER) then
+        AddCSLuaFile(modulePath)
+    end
+    include(modulePath)
 end
 -----------------------------------------------------------------------------------------
 bAdmin_IsLoaded = true
