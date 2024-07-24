@@ -1,5 +1,3 @@
-print("Server Player Module Intialized.")
-
 local bAdmin = bAdmin
 local _command = bAdmin.command
 local rank = bAdmin.rank

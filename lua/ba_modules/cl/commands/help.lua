@@ -1,5 +1,3 @@
-print("Help Module Intialized.")
-
 local bAdmin = bAdmin
 local command = bAdmin.command
 local _utility = bAdmin.util

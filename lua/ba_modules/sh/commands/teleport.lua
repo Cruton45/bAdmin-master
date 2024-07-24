@@ -1,5 +1,3 @@
-print("Teleport Module Intialized.")
-
 local bAdmin = bAdmin
 local command = bAdmin.command
 local utility = bAdmin.util

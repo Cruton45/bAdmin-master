@@ -1,5 +1,3 @@
-print("Rank Commands Module Intialized.")
-
 local bAdmin = bAdmin
 local command = bAdmin.command
 local _player = bAdmin.player

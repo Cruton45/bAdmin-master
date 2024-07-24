@@ -1,5 +1,3 @@
-print("Server Commands Module Intialized.")
-
 local bAdmin = bAdmin
 local command = bAdmin.command
 local rank = bAdmin.rank

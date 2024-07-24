@@ -1,5 +1,3 @@
-print("Bot Module Intialized.")
-
 local bAdmin = bAdmin
 local command = bAdmin.command
 local utility = bAdmin.util
