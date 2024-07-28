@@ -23,14 +23,14 @@ local admin = {
     name = "admin",
     immunity = 50,
     inherit = "user",
-    permissions = {"help","bring", "noclip"}
+    permissions = {"help","bring", "return", "noclip"}
 }
 
 local superadmin = {
     name = "superadmin",
     immunity = 100,
     inherit = "admin",
-    permissions = {"help", "bring", "addbot", "addrank", "removerank", "setuser", "noclip"}
+    permissions = {"help", "bring", "return", "addbot", "addrank", "removerank", "setuser", "noclip"}
 }
 
 ranks[user.name] = user
