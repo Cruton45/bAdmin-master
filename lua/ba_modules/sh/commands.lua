@@ -6,8 +6,6 @@ local command = {}
 
 command.__index = command
 
----- Add hasTarget as boolean for commands class
-
 function command.new(cmdName)
     local self = setmetatable(self or {},command)
     self.name = cmdName:lower() or "Unamed"

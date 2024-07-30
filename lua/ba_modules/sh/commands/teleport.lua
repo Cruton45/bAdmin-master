@@ -33,6 +33,7 @@ returnCmd.canServerConsole = false
 returnCmd.commandFunc = function(ply, target, args)
     if not(target.ba_previousPosition) then
         print("Does not have a return point.")
+        return
     end
     
     target:SetPos(target.ba_previousPosition)
