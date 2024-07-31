@@ -46,6 +46,10 @@ function command.commandError(caller, errorString)
     hook.Run( "bAdmin_chatCommandFailure", caller, errorString)
 end
 
+function command.logCommand(usedCommand, str)
+    hook.Run( "bAdmin_commandSuccess", str)
+end
+
 function command.useCaseError(caller, usedCommand)
     --hook.Run( "bAdmin_notifyCommandCaller", "You did not use " .. usedCommand.name .. "correctly.\n Correct use is: " .. usedCommand.useCase)
 end

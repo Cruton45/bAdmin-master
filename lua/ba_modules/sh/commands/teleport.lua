@@ -1,6 +1,5 @@
 local bAdmin = bAdmin
 local command = bAdmin.command
-local utility = bAdmin.util
 local _player = bAdmin.player
 
 local TP_OFFSET = Vector(1,50,10)
@@ -20,7 +19,7 @@ bringCmd.commandFunc = function(ply, target, args)
     target:SetPos(futurePosition)
     target:SetEyeAngles((ply:GetPos() - futurePosition):Angle())
 
-    utility.logCommand(bringCmd, ply:Nick() .. " has brought " .. target:Nick() .. ".")
+    command.logCommand(bringCmd, ply:Nick() .. " has brought " .. target:Nick() .. ".")
 end 
 
 local returnCmd = command.new("return")
@@ -40,6 +39,8 @@ returnCmd.commandFunc = function(ply, target, args)
     target:SetEyeAngles(target.ba_previousAngle)
 
     target.ba_previousPosition, target.ba_previousAngle = nil, nil
+
+    command.logCommand(bringCmd, ply:Nick() .. " has returned " .. target:Nick() .. ".")
 end
 
 -- Find a better place for noclip command.

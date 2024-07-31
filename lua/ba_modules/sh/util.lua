@@ -12,10 +12,6 @@ end
 
 -- Refactor and add more functionality here. Add custom formating with string.
 -- Don't like calling this function in every command function, figure something else out.
-function utility.logCommand(usedCommand, str)
-    hook.Run( "bAdmin_commandSuccess", str)
-end
-
 function utility.isCallerServerConsole(caller)
     -- Caller will be a null ent if console
     if not(caller[1]) then

@@ -13,5 +13,5 @@ addBotCmd.commandFunc = function(ply, args)
     RunConsoleCommand("bot", "1")
     -- Could make this unnecessary if I format this into util.logCommand 
     local callerName = utility.getConsoleOrPlayerName(ply)
-    utility.logCommand(addBotCmd, callerName .. " has spawned a bot.") 
+    command.logCommand(addBotCmd, callerName .. " has spawned a bot.") 
 end
